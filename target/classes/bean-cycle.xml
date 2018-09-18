@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+		init-method 创建 bean 时会调用的方法
+		destroy-method 销毁 bean 时会调用的方法
+		
+		bean 的生命周期  
+		①构造器方法被调用	②属性设置的 set 方法被调用
+		③ init 方法被调用 ④bean可以被使用 ⑤ desyory 方法被调用
+		
+	 -->
+	<bean id="car" class="com.lmg.bean.cycle.Car"
+	init-method="init"
+	destroy-method="destory">
+		<property name="brand" value="Audi"></property>
+	</bean>
+	<!-- 实现 BeanPostProcessor 接口,并具体提供
+		Object postProcessAfterInitialization(Object bean, String beanName):inint-method之后被调用
+		Object postProcessBeforeInitialization(Object bean, String beanName):init-method之前被调用
+		的实现
+		
+		bean: bean 实例本身
+		beanName: IOC 容器配置的 bean 的名字
+		返回值: 是实际上返回给用户的那个 Bean, 注意: 可以在以上两个方法中修改返回的 bean,甚至返回一个新的 bean
+	 -->
+	<!-- 配置 bean 的后置处理器: 不需要配置 id, IOC 容器自动识别是一个 BeanPostProcessor -->
+	<bean class="com.lmg.bean.cycle.MyBeanPostProcess"></bean>
+</beans>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 配置bean -->
+	<!-- 
+		class: bean 的全类名,通过反射的方式在 IOC　容器中创建Bean.所以要求 Bean 中必需有无参的构造器
+		id: 标识容器中bean. id 唯一.
+	 -->
+	<bean id="helloSpring" class="com.lmg.SprinDemo.HelloSpring">
+		<property name="name" value="spring"></property>
+	</bean>
+	<!-- 
+		通过构造方法来配置 bean 的属性
+	 -->
+	<bean id="car" class="com.lmg.SprinDemo.Car">
+		<constructor-arg value="audi" index="0"></constructor-arg>
+		<constructor-arg value="shanghai" index="1"></constructor-arg>
+		<constructor-arg value="300000" type="double"></constructor-arg>
+	</bean>
+	<!-- 使用构造器注入属性值可以指定参数的位置和参数的类型! 以区分重载的构造器 -->
+	<bean id="car1" class="com.lmg.SprinDemo.Car">
+		<constructor-arg value="baoma" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="beijing" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="240" type="int"></constructor-arg>
+	</bean>
+	<!-- 
+		通过类对象获取bean时要保证 容器中只存在一个类对象	
+	 -->
+	<!-- <bean id="helloSpring1" class="com.lmg.SprinDemo.HelloSpring">
+		<property name="name" value="spring"></property>
+	</bean> -->
+</beans>
